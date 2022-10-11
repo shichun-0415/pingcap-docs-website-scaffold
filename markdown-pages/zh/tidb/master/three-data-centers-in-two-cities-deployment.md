@@ -1,9 +1,9 @@
 ---
-title: 双区域多 AZ 部署
+title: 双区域多 AZ 部署 TiDB
 summary: 介绍在两个区域多个可用区部署 TiDB 的方式。
 ---
 
-# 双区域多 AZ 部署
+# 双区域多 AZ 部署 TiDB
 
 本文档简要介绍双区域多可用区 (Availability Zone, AZ) 部署的架构模型及配置。
 
