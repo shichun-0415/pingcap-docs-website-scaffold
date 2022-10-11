@@ -19,11 +19,11 @@ TiDB 分布式数据库采用 Raft 算法，可以原生支持双区域三 AZ �
 
 本文以北京和西安部署集群为例，阐述 TiDB 分布式数据库双区域三 AZ 架构的部署模型。
 
-假设北京有两个 AZ，AZ1 和 AZ2，西安有一个 AZ AZ3。北京同区域两 AZ 之间网络延迟低于 3 ms，北京与西安之间的网络使用 ISP 专线，延迟约 20 ms。
+假设北京有两个 AZ，AZ1 和 AZ2，西安有一个 AZ，AZ3。北京同区域两 AZ 之间网络延迟低于 3 ms，北京与西安之间的网络使用 ISP 专线，延迟约 20 ms。
 
 下图为集群部署架构图，具体如下：
 
-- 集群采用双区域三 AZ 部署方式，分别为北京 AZ1，北京 AZ2，西安 AZ3；
+- 集群采用双区域三 AZ 部署方式，分别为北京 AZ1、北京 AZ2 和西安 AZ3。
 - 集群采用 5 副本模式，其中 AZ1 和 AZ2 分别放 2 份副本，AZ3 放 1 份副本；TiKV 按机柜设置 Label，即每个机柜上有 1 份副本。
 - 副本间通过 Raft 协议保证数据的一致性和高可用，对用户完全透明。
 
@@ -51,7 +51,7 @@ TiDB 分布式数据库采用 Raft 算法，可以原生支持双区域三 AZ �
 
 如上图所示，北京有两个可用区 AZ1 和 AZ2，可用区 AZ1 有三套机架 rac1、rac2 和 rac3，可用区 AZ2 有两套机架 rac4 和 rac5；西安可用区 AZ3 有一套机架 rac6。
 
-AZ1 的 rac1 机架中，一台服务器部署了 TiDB 和 PD 服务，另外两台服务器部署了 TiKV 服务，其中，每台 TiKV 服务器部署了两个 TiKV 实例 (tikv-server)，rac2、rac4、rac5 和 rac6 类似。
+AZ1 的 rac1 机架中，一台服务器部署了 TiDB 和 PD 服务，另外两台服务器部署了 TiKV 服务。其中，每台 TiKV 服务器部署了两个 TiKV 实例 (tikv-server)，rac2、rac4、rac5 和 rac6 类似。
 
 机架 rac3 上部署了 TiDB Server、中控及监控服务器。TiDB Server 用于日常管理维护和备份。中控和监控服务器上部署了 Prometheus、Grafana 以及恢复工具。
 
@@ -127,9 +127,9 @@ alertmanager_servers:
   - host: 10.63.10.60
 ```
 
-### Labels 设计
+### Label 设计
 
-在双区域三 AZ 部署方式下，对于 Labels 的设计需要充分考虑到系统的可用性和容灾能力，建议根据部署的物理结构来定义 AZ、replication zone、rack 和 host 四个等级。
+在双区域三 AZ 部署方式下，对于 Label 的设计需要充分考虑系统的可用性和容灾能力，建议根据部署的物理结构来定义 AZ、replication zone、rack 和 host 四个等级。
 
 ![Label 逻辑定义图](/media/three-data-centers-in-two-cities-deployment-03.png)
 
