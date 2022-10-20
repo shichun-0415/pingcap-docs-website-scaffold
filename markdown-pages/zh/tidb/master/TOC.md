@@ -4,13 +4,9 @@
 - [文档中心](https://docs.pingcap.com/zh)
 - 关于 TiDB
   - [TiDB 简介](/overview.md)
-  - [TiDB 6.2 Release Notes](/releases/release-6.2.0.md)
+  - [TiDB 6.3 Release Notes](/releases/release-6.3.0.md)
   - [基本功能](/basic-features.md)
   - [实验特性](/experimental-features.md)
-  - 性能测试报告
-    - [Sysbench 性能对比 - v6.2 对比 v6.1](/benchmark/benchmark-sysbench-v6.2.0-vs-v6.1.0.md)
-    - [TPC-C 性能对比 - v6.2 对比 v6.1](/benchmark/v6.2-performance-benchmarking-with-tpcc.md)
-    - [TiFlash 与 Greenplum/Spark 性能比较](/benchmark/v6.2-performance-benchmarking-with-tpch.md)
   - [与 MySQL 的兼容性](/mysql-compatibility.md)
   - [使用限制](/tidb-limitations.md)
   - [荣誉列表](/credits.md)
@@ -81,7 +77,7 @@
   - 云原生开发环境
     - [Gitpod](/develop/dev-guide-playground-gitpod.md)
   - 第三方软件支持
-    - [PingCAP 维护的三方库](/develop/dev-guide-third-party-support.md)
+    - [TiDB 支持的第三方工具](/develop/dev-guide-third-party-support.md)
     - [TiDB 与 ProxySQL 集成](/develop/dev-guide-proxysql-integration.md)
 - 部署标准集群
   - [软硬件环境需求](/hardware-and-software-requirements.md)
@@ -101,7 +97,7 @@
   - 测试集群性能
     - [用 Sysbench 测试 TiDB](/benchmark/benchmark-tidb-using-sysbench.md)
     - [对 TiDB 进行 TPC-C 测试](/benchmark/benchmark-tidb-using-tpcc.md)
-    - [对 TiDB 进行 CH Benchmark 测试](/benchmark/benchmark-tidb-using-ch.md)
+    - [对 TiDB 进行 CH-benCHmark 测试](/benchmark/benchmark-tidb-using-ch.md)
 - 数据迁移
   - [数据迁移概述](/migration-overview.md)
   - [迁移工具](/migration-tools.md)
@@ -134,9 +130,28 @@
     - [使用 TiUP（推荐）](/scale-tidb-using-tiup.md)
     - [使用 TiDB Operator](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/scale-a-tidb-cluster)
   - 备份与恢复
-    - [使用 BR 备份集群](/br-usage-backup-for-maintain.md)
-    - [使用 BR 恢复集群](/br-usage-restore-for-maintain.md)
-    - [BR 备份恢复场景示例](/backup-and-restore-use-cases-for-maintain.md)
+    - [TiDB 备份恢复功能介绍](/br/backup-and-restore-overview.md)
+    - [TiDB 备份恢复架构设计](/br/backup-and-restore-design.md)
+      - [备份集群快照数据](/br/br-snapshot-architecture.md#备份集群快照数据)
+      - [恢复快照备份数据](/br/br-snapshot-architecture.md#恢复快照备份数据)
+      - [日志备份 - 备份 kv 数据变更](/br/br-log-architecture.md#进行日志备份)
+      - [恢复到指定时间点 PITR](/br/br-log-architecture.md#进行-pitr)
+    - [备份存储](/br/backup-and-restore-storages.md)
+    + [使用 br 进行备份与恢复](/br/br-use-overview.md)
+      - [使用 br 进行（全量）快照备份与恢复](/br/br-snapshot-guide.md)
+      - [使用 br 进行日志备份和 PITR](/br/br-pitr-guide.md)
+      - [备份和恢复实践示例](/br/br-usage.md)
+    - [br cli 命令手册](/br/use-br-command-line-tool.md)
+      - [（全量）快照备份和恢复命令手册](/br/br-snapshot-manual.md)
+      - [日志备份和 PITR 命令手册](/br/br-pitr-manual.md)
+    - 参考指南
+      - BR 特性设计
+        - [自动调节](/br/br-auto-tune.md)
+        - [批量建表](/br/br-batch-create-table.md)
+      - [使用 Dumpling 和 TiDB Lightning 备份和恢复数据](/backup-and-restore-using-dumpling-lightning.md)
+      - [RawKV 备份和恢复](/br/rawkv-backup-and-restore.md)
+      - [外部存储](/br/external-storage.md)
+      - [增量备份使用指南](/br/br-incremental-guide.md)
   - [修改时区](/configure-time-zone.md)
   - [日常巡检](/daily-check.md)
   - [TiFlash 常用运维操作](/tiflash/maintain-tiflash.md)
@@ -152,6 +167,7 @@
   - [TiDB 集群报警规则与处理方法](/alert-rules.md)
   - [TiFlash 报警规则与处理方法](/tiflash/tiflash-alert-rules.md)
   - [自定义监控组件的配置](/tiup/customized-montior-in-tiup-environment.md)
+  - [BR 监控告警](/br/br-monitoring-and-alert.md)
 - 故障诊断
   - [定位慢查询](/identify-slow-queries.md)
   - [分析慢查询](/analyze-slow-queries.md)
@@ -174,6 +190,7 @@
     - [优化概述](/performance-tuning-overview.md)
     - [优化方法](/performance-tuning-methods.md)
     - [优化实践](/performance-tuning-practices.md)
+    - [延迟的拆解分析](/latency-breakdown.md)
   - 配置调优
       - [操作系统性能参数调优](/tune-operating-system.md)
       - [TiDB 内存调优](/configure-memory-usage.md)
@@ -343,7 +360,8 @@
   - PingCAP Clinic 诊断服务
     - [概述](/clinic/clinic-introduction.md)
     - [快速上手](/clinic/quick-start-with-clinic.md)
-    - [使用 PingCAP Clinic 诊断 TiDB 集群](/clinic/clinic-user-guide-for-tiup.md)
+    - [使用 PingCAP Clinic 诊断集群](/clinic/clinic-user-guide-for-tiup.md)
+    - [使用 PingCAP Clinic 生成诊断报告](/clinic/clinic-report.md)
     - [采集 SQL 查询计划信息](/clinic/clinic-collect-sql-query-plan.md)
     - [数据采集说明](/clinic/clinic-data-instruction-for-tiup.md)
   - [TiDB Operator](/tidb-operator-overview.md)
@@ -359,15 +377,15 @@
       - [SQL](/tidb-lightning/tidb-lightning-data-source.md#sql)
       - [Parquet](/tidb-lightning/tidb-lightning-data-source.md#parquet)
       - [自定义文件匹配](/tidb-lightning/tidb-lightning-data-source.md#自定义文件匹配)
-    - Physical 导入模式
+    - Physical Import Mode
       - [概述](/tidb-lightning/tidb-lightning-physical-import-mode.md)
       - [必要条件及限制](/tidb-lightning/tidb-lightning-physical-import-mode.md#必要条件及限制)
       - [配置及使用](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md)
       - [冲突检测](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md#冲突数据检测)
       - [性能调优](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md#性能调优)
-    - Logical 导入模式
+    - Logical Import Mode
       - [概述](/tidb-lightning/tidb-lightning-logical-import-mode.md)
-      - [必要条件及限制](/tidb-lightning/tidb-lightning-logical-import-mode.md#必要条件及限制)
+      - [必要条件及限制](/tidb-lightning/tidb-lightning-logical-import-mode.md#必要条件)
       - [配置及使用](/tidb-lightning/tidb-lightning-logical-import-mode-usage.md)
       - [冲突检测](/tidb-lightning/tidb-lightning-logical-import-mode-usage.md#冲突数据检测)
       - [性能调优](/tidb-lightning/tidb-lightning-logical-import-mode-usage.md#性能调优)
@@ -388,6 +406,7 @@
     - [关于 Data Migration](/dm/dm-overview.md)
     - [架构简介](/dm/dm-arch.md)
     - [快速开始](/dm/quick-start-with-dm.md)
+    - [最佳实践](/dm/dm-best-practices.md)
     - 部署 DM 集群
       - [软硬件要求](/dm/dm-hardware-and-software-requirements.md)
       - [使用 TiUP 联网部署（推荐）](/dm/deploy-a-dm-cluster-using-tiup.md)
@@ -474,32 +493,6 @@
         - [常见问题](/dm/dm-faq.md)
         - [错误处理及恢复](/dm/dm-error-handling.md)
       - [版本发布历史](/dm/dm-release-notes.md)
-  - Backup & Restore (BR)
-    - [BR 简介](/br/backup-and-restore-overview.md)
-    - [部署和使用 BR](/br/br-deployment.md)
-    - [使用 BR 备份集群](/br/br-usage-backup.md)
-    - [使用 BR 恢复集群](/br/br-usage-restore.md)
-    - [BR 备份与恢复场景示例](/br/backup-and-restore-use-cases.md)
-    - BR 特性
-      - [自动调节](/br/br-auto-tune.md)
-      - [批量建表](/br/br-batch-create-table.md)
-    - 参考指南
-      - [BR 设计原理](/br/backup-and-restore-design.md)
-      - [BR 命令行介绍](/br/use-br-command-line-tool.md)
-      - [外部存储](/br/backup-and-restore-storages.md)
-      - [使用 BR 在 Amazon S3 备份和恢复数据](/br/backup-storage-S3.md)
-      - [使用 BR 在 Azure Blob Storage 备份和恢复数据](/br/backup-storage-azblob.md)
-      - [使用 BR 在 Google Cloud Storage 备份和恢复数据](/br/backup-storage-gcs.md)
-      - [使用 BR 备份和恢复 RawKV 数据](/br/rawkv-backup-and-restore.md)
-      - [使用 Dumpling 和 TiDB Lightning 备份和恢复数据](/backup-and-restore-using-dumpling-lightning.md)
-      - [BR 常见问题](/br/backup-and-restore-faq.md)
-  - Point-in-time Recovery
-    - [PITR 简介](/br/point-in-time-recovery.md)
-    - [通过命令行使用 PITR](/br/br-log-command-line.md)
-    - [使用场景示例](/br/pitr-usage.md)
-    - [监控告警](/br/pitr-monitoring-and-alert.md)
-    - [故障处理](/br/pitr-troubleshoot.md)
-    - [已知问题](/br/pitr-known-issues.md)
   - TiDB Binlog
     - [概述](/tidb-binlog/tidb-binlog-overview.md)
     - [快速上手](/tidb-binlog/get-started-with-tidb-binlog.md)
@@ -614,7 +607,6 @@
       - [`ALTER PLACEMENT POLICY`](/sql-statements/sql-statement-alter-placement-policy.md)
       - [`ALTER TABLE`](/sql-statements/sql-statement-alter-table.md)
       - [`ALTER TABLE COMPACT`](/sql-statements/sql-statement-alter-table-compact.md)
-      - [`ALTER TABLE SET TIFLASH MODE`](/sql-statements/sql-statement-set-tiflash-mode.md)
       - [`ALTER USER`](/sql-statements/sql-statement-alter-user.md)
       - [`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md)
       - [`BACKUP`](/sql-statements/sql-statement-backup.md)
@@ -761,6 +753,7 @@
       - [集合运算](/functions-and-operators/set-operators.md)
       - [下推到 TiKV 的表达式列表](/functions-and-operators/expressions-pushed-down.md)
       - [TiDB 特有的函数](/functions-and-operators/tidb-functions.md)
+      - [Oracle 与 TiDB 函数和语法差异对照](/oracle-functions-to-tidb.md)
     - [聚簇索引](/clustered-indexes.md)
     - [约束](/constraints.md)
     - [生成列](/generated-columns.md)
@@ -833,6 +826,7 @@
         - [`VARIABLES_INFO`](/information-schema/information-schema-variables-info.md)
         - [`VIEWS`](/information-schema/information-schema-views.md)
       - [`METRICS_SCHEMA`](/metrics-schema.md)
+    - [元数据锁](/metadata-lock.md)
   - UI
     - TiDB Dashboard
       - [简介](/dashboard/dashboard-intro.md)
@@ -910,14 +904,18 @@
   - [集群管理 FAQ](/faq/manage-cluster-faq.md)
   - [高可用 FAQ](/faq/high-availability-faq.md)
   - [高可靠 FAQ](/faq/high-reliability-faq.md)
+  - [备份恢复 FAQ](/faq/br-faq.md)
 - 版本发布历史
   - [发布版本汇总](/releases/release-notes.md)
   - [版本发布时间线](/releases/release-timeline.md)
   - [TiDB 版本规则](/releases/versioning.md)
   - [TiDB 离线包](/binary-package.md)
+  - v6.3
+    - [6.3.0-DMR](/releases/release-6.3.0.md)
   - v6.2
     - [6.2.0-DMR](/releases/release-6.2.0.md)
   - v6.1
+    - [6.1.1](/releases/release-6.1.1.md)
     - [6.1.0](/releases/release-6.1.0.md)
   - v6.0
     - [6.0.0-DMR](/releases/release-6.0.0-dmr.md)
@@ -926,6 +924,7 @@
     - [5.4.1](/releases/release-5.4.1.md)
     - [5.4.0](/releases/release-5.4.0.md)
   - v5.3
+    - [5.3.3](/releases/release-5.3.3.md)
     - [5.3.2](/releases/release-5.3.2.md)
     - [5.3.1](/releases/release-5.3.1.md)
     - [5.3.0](/releases/release-5.3.0.md)
