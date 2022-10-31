@@ -18,7 +18,7 @@
 - 应用开发
   - [概览](/develop/dev-guide-overview.md)
   - 快速开始
-    - [使用 TiDB Cloud (Developer Tier) 构建 TiDB 集群](/develop/dev-guide-build-cluster-in-cloud.md)
+    - [使用 TiDB Cloud (Serverless Tier) 构建 TiDB 集群](/develop/dev-guide-build-cluster-in-cloud.md)
     - [使用 TiDB 的增删改查 SQL](/develop/dev-guide-tidb-crud-sql.md)
     - 构建简单的 CRUD 应用程序
       - [Java](/develop/dev-guide-sample-application-java.md)
@@ -76,8 +76,9 @@
       - [SQL 开发规范](/develop/dev-guide-sql-development-specification.md)
   - 云原生开发环境
     - [Gitpod](/develop/dev-guide-playground-gitpod.md)
-  - 第三方软件支持
+  - 第三方工具支持
     - [TiDB 支持的第三方工具](/develop/dev-guide-third-party-support.md)
+    - [已知的第三方工具兼容问题](/develop/dev-guide-third-party-tools-compatibility.md)
     - [TiDB 与 ProxySQL 集成](/develop/dev-guide-proxysql-integration.md)
 - 部署标准集群
   - [软硬件环境需求](/hardware-and-software-requirements.md)
@@ -130,28 +131,29 @@
     - [使用 TiUP（推荐）](/scale-tidb-using-tiup.md)
     - [使用 TiDB Operator](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/scale-a-tidb-cluster)
   - 备份与恢复
-    - [TiDB 备份恢复功能介绍](/br/backup-and-restore-overview.md)
-    - [TiDB 备份恢复架构设计](/br/backup-and-restore-design.md)
-      - [备份集群快照数据](/br/br-snapshot-architecture.md#备份集群快照数据)
-      - [恢复快照备份数据](/br/br-snapshot-architecture.md#恢复快照备份数据)
-      - [日志备份 - 备份 kv 数据变更](/br/br-log-architecture.md#进行日志备份)
-      - [恢复到指定时间点 PITR](/br/br-log-architecture.md#进行-pitr)
-    - [备份存储](/br/backup-and-restore-storages.md)
-    - [使用 br 进行备份与恢复](/br/br-use-overview.md)
-      - [使用 br 进行（全量）快照备份与恢复](/br/br-snapshot-guide.md)
-      - [使用 br 进行日志备份和 PITR](/br/br-pitr-guide.md)
-      - [备份和恢复实践示例](/br/br-usage.md)
-    - [br cli 命令手册](/br/use-br-command-line-tool.md)
-      - [（全量）快照备份和恢复命令手册](/br/br-snapshot-manual.md)
+    - [功能介绍](/br/backup-and-restore-overview.md)
+    - 架构设计
+      - [架构概述](/br/backup-and-restore-design.md)
+      - [快照备份和恢复架构](/br/br-snapshot-architecture.md)
+      - [日志备份和 PITR 架构](/br/br-log-architecture.md)
+    - 使用 BR 进行备份与恢复
+      - [使用概述](/br/br-use-overview.md)
+      - [快照备份和恢复](/br/br-snapshot-guide.md)
+      - [日志备份和 PITR](/br/br-pitr-guide.md)
+      - [实践示例](/br/backup-and-restore-use-cases.md)
+      - [备份存储](/br/backup-and-restore-storages.md)
+    - br cli 命令手册
+      - [命令概述](/br/use-br-command-line-tool.md)
+      - [快照备份和恢复命令手册](/br/br-snapshot-manual.md)
       - [日志备份和 PITR 命令手册](/br/br-pitr-manual.md)
     - 参考指南
-      - BR 特性设计
+      - BR 特性
         - [自动调节](/br/br-auto-tune.md)
         - [批量建表](/br/br-batch-create-table.md)
       - [使用 Dumpling 和 TiDB Lightning 备份和恢复数据](/backup-and-restore-using-dumpling-lightning.md)
       - [RawKV 备份和恢复](/br/rawkv-backup-and-restore.md)
       - [外部存储](/br/external-storage.md)
-      - [增量备份使用指南](/br/br-incremental-guide.md)
+      - [增量备份和恢复使用指南](/br/br-incremental-guide.md)
   - [修改时区](/configure-time-zone.md)
   - [日常巡检](/daily-check.md)
   - [TiFlash 常用运维操作](/tiflash/maintain-tiflash.md)
@@ -176,6 +178,7 @@
   - [通过日志定位消耗系统资源多的查询](/identify-expensive-queries.md)
   - [SQL 语句统计](/statement-summary-tables.md)
   - [保存和恢复集群现场信息](/sql-plan-replayer.md)
+  - [TiDB OOM 故障排查](/troubleshoot-tidb-oom.md)
   - [TiDB 集群常见问题](/troubleshoot-tidb-cluster.md)
   - [TiDB 集群问题导图](/tidb-troubleshooting-map.md)
   - [热点问题处理](/troubleshoot-hot-spot-issues.md)
@@ -242,9 +245,9 @@
       - [执行计划管理](/sql-plan-management.md)
       - [优化规则及表达式下推的黑名单](/blocklist-control-plan.md)
 - 教程
-  - [同城多中心部署](/multi-data-centers-in-one-city-deployment.md)
-  - [两地三中心部署](/three-data-centers-in-two-cities-deployment.md)
-  - [同城两中心部署](/two-data-centers-in-one-city-deployment.md)
+  - [单区域多 AZ 部署](/multi-data-centers-in-one-city-deployment.md)
+  - [双区域多 AZ 部署](/three-data-centers-in-two-cities-deployment.md)
+  - [单区域双 AZ 部署](/two-data-centers-in-one-city-deployment.md)
   - 读取历史数据
     - 使用 Stale Read 功能读取历史数据（推荐）
       - [Stale Read 使用场景介绍](/stale-read.md)
@@ -904,7 +907,7 @@
   - [集群管理 FAQ](/faq/manage-cluster-faq.md)
   - [高可用 FAQ](/faq/high-availability-faq.md)
   - [高可靠 FAQ](/faq/high-reliability-faq.md)
-  - [备份恢复 FAQ](/faq/br-faq.md)
+  - [备份恢复 FAQ](/faq/backup-and-restore-faq.md)
 - 版本发布历史
   - [发布版本汇总](/releases/release-notes.md)
   - [版本发布时间线](/releases/release-timeline.md)
@@ -915,11 +918,13 @@
   - v6.2
     - [6.2.0-DMR](/releases/release-6.2.0.md)
   - v6.1
+    - [6.1.2](/releases/release-6.1.2.md)
     - [6.1.1](/releases/release-6.1.1.md)
     - [6.1.0](/releases/release-6.1.0.md)
   - v6.0
     - [6.0.0-DMR](/releases/release-6.0.0-dmr.md)
   - v5.4
+    - [5.4.3](/releases/release-5.4.3.md)
     - [5.4.2](/releases/release-5.4.2.md)
     - [5.4.1](/releases/release-5.4.1.md)
     - [5.4.0](/releases/release-5.4.0.md)
